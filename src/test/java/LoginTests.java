@@ -10,14 +10,14 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
-    @Test(enabled = false, description = "Check if user login with correct credentials", priority = 1, groups = "Smoke")
+    @Test(description = "Check if user login with correct credentials", priority = 1, groups = "Smoke")
     public void loginTest() {
         login("demo@class.com", "te$t$tudent");
         WebElement avatar = driver.findElement(By.cssSelector("#userBadge img"));
-        Assert.assertTrue(avatar.isDisplayed()); // true
+        Assert.assertFalse(avatar.isDisplayed()); // true
     }
 
-    @Test
+    @Test(groups = "Regression")
     public void loginWithEmptyCredentials() {
         WebElement logo = driver.findElement(By.cssSelector(".logo"));
         login("demo@class.com", "");
