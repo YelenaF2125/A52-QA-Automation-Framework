@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -17,10 +18,10 @@ public class LoginTests extends BaseTest {
         Assert.assertFalse(avatar.isDisplayed()); // true
     }
 
-    @Test(groups = "Regression")
-    public void loginWithEmptyCredentials() {
+    @Test(groups = "Regression", dataProvider = "incorrectCredentials", dataProviderClass = DataProviderCredentials.class)
+    public void loginWithEmptyCredentials(String email, String password) {
         WebElement logo = driver.findElement(By.cssSelector(".logo"));
-        login("demo@class.com", "");
+        login(email, password);
         Assert.assertTrue(logo.isDisplayed());
     }
 }
